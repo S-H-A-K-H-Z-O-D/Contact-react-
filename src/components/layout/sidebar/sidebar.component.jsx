@@ -6,15 +6,12 @@ export const Sidebar = ({ users, setUsers }) => {
   const elSearch = useRef();
 
   let onSearch = (e) => {
-    let text = elSearch.current.value.toLowerCase();
     let regex = new RegExp(elSearch.current.value, "gi");
-    console.log(regex);
-    console.log(regex);
     let searchedUsers = [];
     let contacts = JSON.parse(localStorage.getItem("users"));
 
     contacts?.map((user) => {
-      if (user.fullName.toLowerCase().includes(text)) {
+      if (user.fullName.match(regex)) {
         searchedUsers.push(user);
         setUsers(searchedUsers);
       }
